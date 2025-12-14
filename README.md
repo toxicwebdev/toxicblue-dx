@@ -1,43 +1,57 @@
-# toxicblue-dx &nbsp; [![bluebuild build badge](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build.yml/badge.svg)](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build.yml)
+# Toxicblue
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+<p align="center">
+  <img src="assets/toxic.png" href="[https://github.com/toxicwebdev/toxicblue](https://github.com/toxicwebdev/toxicblue)" width=300/>
+</p>
 
-After setup, it is recommended you update this README to describe your custom image.
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2503a44c1105456483517f793af75ee7)](https://app.codacy.com/gh/toxicwebdev/toxicblue-dx/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![toxicblue-dx](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build-dx.yml/badge.svg)](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build-dx.yml)
+[![toxicblue-nvidia-dx](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build-nvidia-dx.yml/badge.svg)](https://github.com/toxicwebdev/toxicblue-dx/actions/workflows/build-nvidia-dx.yml)
+[![trivy](https://github.com/toxicwebdev/toxicblue/actions/workflows/trivy.yml/badge.svg)](https://github.com/toxicwebdev/toxicblue/actions/workflows/trivy.yml)
 
-## Installation
+## Overview
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+toxicblue-dx is a project that leverages the [BlueBuild](https://blue-build.org/) template to create minimally-opinionated [Fedora Atomic](https://fedoraproject.org/atomic-desktops/) operating system images for various Wayland compositors.
 
-To rebase an existing atomic Fedora installation to the latest build:
+## Features
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/toxicwebdev/toxicblue-dx:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/toxicwebdev/toxicblue-dx:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+The Toxicblue Developer Experience (toxicblue-dx) is a dedicated developer image with bundled tools, it offers a kickass cloud-native developer workflow with integrated container tools, declarative system management, and seamless CI/CD integration.  Unlike traditional Linux systems, the operating system and developer environment are explicitly and purposely separated. This means that tooling is not installed on the host, and is instead containerized, in a virtual machine, or scoped to the user's home directory. It is designed to meet the following use cases:
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+Toxicblue Developer Experience endeavors to ship:
 
-## ISO
+- The world's most powerful cloud native developer environment
+- Full virtualization support centered around QEMU/KVM, as well as support for Docker and Incus
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+## Purpose
+
+Toxicblue Developer Experience goes "all in" on cloud native development and is used differently than a traditional distribution such as Ubuntu:
+
+- Development is done in devcontainers
+- Command line applications are installed using homebrew
+- Preconfigured ad-hoc containers for Ubuntu, Fedora, and Wolfi are included. Use whichever distribution you want.
+
+This differs from traditional distributions by making the development process operating system agnostic. There is no equivalent to apt install php on Toxicblue Developer Experience; development is done with podman or docker directly via an IDE.
+
+We also believe in easy access to other thriving ecosystems like Python via uv.
+
+The pattern in toxicblue-dx centers around devcontainers. Since devcontainers live in the project's git repository, they can be deployed on any operating system: Linux, macOS, or Windows (via WSL). This facilitates "distributed by default" development and avoids Linux users being "the odd one out" when working with teammates on other operating systems.
+
+Each project includes a declarative environment intended to start the user with a "best practice" cloud-native workflow out of the box. The Ultimate Guide to Dev Containers has a good write-up on the advantages of using devcontainers. This means that the development environment is kept in version control instead of coupled to the host.
+
+Homebrew can also be used to install development tools. However, it is recommended to avoid that and declare the project's dependencies in version control.
+
+## Customization
+
+For custom modifications, it's recommended to create a new repo using the [BlueBuild template](https://github.com/blue-build/template) rather than forking this project. Set your `base-image` to a toxicblue image to apply your customizations efficiently without constant upstream synchronization.
 
 ## Verification
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Images are signed using [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). Verify signatures by downloading the `cosign.pub` file and running:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/toxicwebdev/toxicblue-dx
+cosign verify --key cosign.pub ghcr.io/toxicwebdev/$IMAGE_NAME:latest
 ```
+
+## Contributing
+
+Please refer to the [contributing documentation](CONTRIBUTING.md#contributing) and adhere to the [Code of Conduct](CODE_OF_CONDUCT.md).

@@ -1,0 +1,30 @@
+name: Linkspector
+on: 
+  merge_group:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  check-links:
+    name: Linkspector
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run linkspector
+        uses: umbrelladocs/action-linkspector@652f85bc57bb1e7d4327260decc10aa68f7694c3 # v1.4.0
+        with:
+          filter_mode: nofilter
+          reporter: github-pr-review
+          fail_on_error: true
+          config_file: .github/workflows/config/linkspector.yml

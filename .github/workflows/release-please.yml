@@ -1,0 +1,29 @@
+name: release-please
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  release-please:
+    name: Release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # требуется для настройки прав доступа к репозиторию
+      pull-requests: write # требуется для настройки прав доступа к репозиторию
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
+      tag: ${{ steps.release-please.outputs.tag_name }}
+      upload_url: ${{ steps.release-please.outputs.upload_url }}
+    steps:
+      - name: Run release-please
+        uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
+        id: release-please
+        with:
+          release-type: simple

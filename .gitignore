@@ -1,3 +1,6 @@
+.idea
 cosign.key
 cosign.private
-/Containerfile
+.directory
+*.kate-swp
+Containerfile

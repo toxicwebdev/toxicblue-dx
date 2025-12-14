@@ -1,0 +1,11 @@
+name: sway-dx
+
+description: ublue images for wayland compositors
+
+base-image: ghcr.io/toxicwebdev/sway
+
+image-version: latest
+
+modules:
+  - from-file: common/dx-modules.yml
+  - from-file: common/final-modules.yml
