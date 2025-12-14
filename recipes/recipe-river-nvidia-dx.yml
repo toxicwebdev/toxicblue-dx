@@ -2,7 +2,7 @@ name: river-nvidia-dx
 
 description: ublue images for wayland compositors
 
-base-image: ghcr.io/toxicwebdev/river-nvidi
+base-image: ghcr.io/toxicwebdev/river-nvidia
 
 image-version: latest
 
