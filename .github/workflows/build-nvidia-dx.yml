@@ -4,7 +4,9 @@ on:
     - cron: "00 07 * * 1" # Создается в 7:00 UTC по Понедельникам
 
   push:
-    paths-ignore: # Не перестраивайте, если изменилась только документация
+    branches-ignore: # Не перестраивать для dependabot
+      - 'dependabot/**'
+    paths-ignore: # Не перестраивать, если изменилась только документация
     - "**.md"
 
   workflow_dispatch: # возможность запускать сборки вручную
@@ -67,7 +69,7 @@ jobs:
       - name: Build toxicblue dx nvidia
         uses: blue-build/github-action@9ba737d93ffa82d7cd6826162c7bc3a2648ae73d # v1.10.3
         with:
-          cli_version: v0.9.27 # если нужно использовать эту конкретную версию инструмента CLI
+          cli_version: v0.9.28 # если нужно использовать эту конкретную версию инструмента CLI
           recipe: ${{ matrix.recipe }}
           cosign_private_key: ${{ secrets.SIGNING_SECRET }}
           registry_token: ${{ github.token }}
