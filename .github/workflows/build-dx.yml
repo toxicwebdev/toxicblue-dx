@@ -1,7 +1,7 @@
 name: build-toxicblue-dx
 on:
   schedule:
-    - cron: "00 07 * * 1" # Создается в 7:00 UTC по Понедельникам
+    - cron: "30 06 * * 1" # Создается в 6:30 UTC по Понедельникам
 
   push:
     branches-ignore: # Не перестраивать для dependabot
@@ -20,7 +20,7 @@ permissions: {}
 jobs:
   bluebuild:
     name: Build toxicblue-dx
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: read # требуется для настройки прав доступа к репозиторию
       packages: write # требуется для настройки прав доступа к репозиторию
@@ -31,10 +31,8 @@ jobs:
         recipe:
           - recipe-hyprland-dx.yml
           - recipe-niri-dx.yml
-          - recipe-qtile-dx.yml
           - recipe-river-dx.yml
           - recipe-sway-dx.yml
-          - recipe-wayfire-dx.yml
     steps:
       - name: Optimize build times
         shell: bash

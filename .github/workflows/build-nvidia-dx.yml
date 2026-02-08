@@ -1,7 +1,7 @@
 name: build-toxicblue-dx-nvidia
 on:
   schedule:
-    - cron: "00 07 * * 1" # Создается в 7:00 UTC по Понедельникам
+    - cron: "30 06 * * 1" # Создается в 6:30 UTC по Понедельникам
 
   push:
     branches-ignore: # Не перестраивать для dependabot
@@ -20,7 +20,7 @@ permissions: {}
 jobs:
   bluebuild:
     name: Build toxicblue dx nvidia
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: read # требуется для настройки прав доступа к репозиторию
       packages: write # требуется для настройки прав доступа к репозиторию
@@ -31,10 +31,8 @@ jobs:
         recipe:
           - recipe-hyprland-nvidia-dx.yml
           - recipe-niri-nvidia-dx.yml
-          - recipe-qtile-nvidia-dx.yml
           - recipe-river-nvidia-dx.yml
           - recipe-sway-nvidia-dx.yml
-          - recipe-wayfire-nvidia-dx.yml
     steps:
       - name: Optimize build times
         shell: bash
