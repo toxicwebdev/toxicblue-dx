@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/toxicwebdev/toxicblue-dx/compare/v1.0.0...v1.1.0) (2026-02-08)
+
+
+### Features
+
+* remove qtile & wayfire images ([6ccac19](https://github.com/toxicwebdev/toxicblue-dx/commit/6ccac19944fee69d8b525b54d61bd5138bec8ecb))
+
 ## 1.0.0 (2025-12-14)
 
 
