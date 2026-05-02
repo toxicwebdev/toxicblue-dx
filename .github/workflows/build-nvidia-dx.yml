@@ -30,6 +30,7 @@ jobs:
       matrix:
         recipe:
           - recipe-hyprland-nvidia-dx.yml
+          - recipe-labwc-nvidia-dx.yml
           - recipe-niri-nvidia-dx.yml
           - recipe-river-nvidia-dx.yml
           - recipe-sway-nvidia-dx.yml
